@@ -5,13 +5,13 @@ import lombok.*;
 
 import java.util.Set;
 
-//@Entity
-@Builder
+@Entity
 @Getter
 @Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class Users {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,10 +28,10 @@ public class User {
 
     private boolean activated;
 
-//    @ManyToMany
-//    @JoinTable(
-//            name = "user_authority",
-//            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "user_id")},
-//            inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "authority_name")})
-//    private Set<Authority> authorities;
+    @ManyToMany
+    @JoinTable(
+            name = "user_authority",  //중간 테이블 생성
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "authority_name"))
+    private Set<Authority> authorities;
 }
