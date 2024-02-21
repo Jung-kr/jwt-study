@@ -20,7 +20,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity  //Spring Security의 웹 보안 기능을 활성화 -> 모든 요청 URL이 스프링 시큐리티의 제어를 받도록 만듬
-//@EnableMethodSecurity  //Spring Security의 메서드 수준 보안을 활성화
+@EnableMethodSecurity  //@PreAuthorize를 메서드 단위로 추가하기 위해 적용
 @RequiredArgsConstructor
 public class SecurityConfig {
 
@@ -60,7 +60,7 @@ public class SecurityConfig {
                 .headers(header -> header.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))
 
                 //JwtFilter를 addFilterBefore로 등록했던 JwtSecurityConfig 클래스 적용
-//                .with(new JwtSecurityConfig(tokenProvider), customizer -> {})
+                .with(new JwtSecurityConfig(tokenProvider), customizer -> {})
 
                 .build();
     }

@@ -16,11 +16,14 @@ import java.io.IOException;
 
 // jwt를 위한 커스텀 필터
 @Slf4j
-@RequiredArgsConstructor
 public class JwtFilter extends GenericFilterBean {
 
     public static final String AUTHORIZATION_HEADER = "Authorization";
     private final TokenProvider tokenProvider;
+
+    public JwtFilter(TokenProvider tokenProvider) {
+        this.tokenProvider = tokenProvider;
+    }
 
     /**
      * jwt 토큰의 인증정보를 현재 실행 중인 SecurityContext에 저장하는 역할
